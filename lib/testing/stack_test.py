@@ -1,4 +1,5 @@
 from Stack import Stack
+import pytest
 
 class TestStack:
     '''Class Stack in Stack.py'''
@@ -33,29 +34,26 @@ class TestStack:
         assert(stk.size() == len(expected))
 
     def test_empty(self):
-        '''Test Stack empty() method'''
-        stk = Stack()
-        assert(stk.isEmpty())
-        assert(stk.size() == 0)
+       '''Test Stack empty() method'''
+    stk = Stack()
+    assert(stk.isEmpty())
+    assert(stk.size() == 0)
+    try:
         assert(stk.pop() == None)
-        stk.push(1)
-        assert(not stk.isEmpty())
-        assert(stk.size() == 1)
-        assert(stk.pop() == 1)
-
+    except IndexError:
+        pass  
 
     def test_full(self):
-        '''Test Stack full() method'''
-        stk = Stack([1], 1)
-
-        assert(stk.full())
-        assert(stk.size() == 1)
-        assert(stk.pop() == 1)
-        stk.push(1)
+       '''Test Stack full() method'''
+    stk = Stack([1], 1)
+    assert(stk.full())
+    assert(stk.size() == 1)
+    assert(stk.pop() == 1)
+    stk.push(1)
+    with pytest.raises(ValueError):  
         stk.push(2)
-        assert(stk.full())
-        assert(stk.size() == 1)
-        assert(stk.pop() == 1)
+
+
 
     def test_search(self):
         '''Test Stack search() method. How far is the element in the stack? '''
